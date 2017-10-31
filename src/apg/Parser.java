@@ -595,7 +595,7 @@ public class Parser {
 			udts[r.ID].mayBeEmpty = r.MAYBEEMPTY;
 			udts[r.ID].callback = null;
 		}
-		
+
 		// first pass creates the list of opcodes
 		count = grammar.getOpcodeCount();
 		opcodes = new Opcode[count];
