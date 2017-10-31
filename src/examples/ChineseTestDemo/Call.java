@@ -25,18 +25,20 @@ public class Call extends Grammar{
 
     // rule name enum
     /** The number of rules in the grammar */
-    public static int ruleCount = 4;
+    public static int ruleCount = 5;
     /** This enum provides easy to remember enum constants for locating the rule identifiers and names.
      * The enum constants have the same spelling as the rule names rendered in all caps with underscores replacing hyphens. */
     public enum RuleNames{
-        /** id = <code>2</code>, name = <code>"contact"</code> */
-        CONTACT("contact", 2, 7, 3),
-        /** id = <code>3</code>, name = <code>"main"</code> */
-        MAIN("main", 3, 10, 16),
-        /** id = <code>0</code>, name = <code>"telephoneaction1"</code> */
-        TELEPHONEACTION1("telephoneaction1", 0, 0, 3),
-        /** id = <code>1</code>, name = <code>"telephoneaction2"</code> */
-        TELEPHONEACTION2("telephoneaction2", 1, 3, 4);
+        /** id = <code>3</code>, name = <code>"contact"</code> */
+        CONTACT("contact", 3, 7, 4),
+        /** id = <code>4</code>, name = <code>"main"</code> */
+        MAIN("main", 4, 11, 4),
+        /** id = <code>0</code>, name = <code>"sp"</code> */
+        SP("sp", 0, 0, 1),
+        /** id = <code>1</code>, name = <code>"telephoneaction1"</code> */
+        TELEPHONEACTION1("telephoneaction1", 1, 1, 3),
+        /** id = <code>2</code>, name = <code>"telephoneaction2"</code> */
+        TELEPHONEACTION2("telephoneaction2", 2, 4, 3);
         private String name;
         private int id;
         private int offset;
@@ -72,7 +74,7 @@ public class Call extends Grammar{
     }
 
     private static Rule[] getRules(){
-    	Rule[] rules = new Rule[4];
+    	Rule[] rules = new Rule[5];
         for(RuleNames r : RuleNames.values()){
             rules[r.ruleID()] = getRule(r.ruleID(), r.ruleName(), r.opcodeOffset(), r.opcodeCount());
         }
@@ -86,33 +88,22 @@ public class Call extends Grammar{
 
         // opcodes
     private static Opcode[] getOpcodes(){
-    	Opcode[] op = new Opcode[26];
-        {int[] a = {1,2}; op[0] = getOpcodeAlt(a);}
-        {char[] a = {19968}; op[1] = getOpcodeTbs(a);}
-        {char[] a = {19969}; op[2] = getOpcodeTbs(a);}
-        {int[] a = {4,5,6}; op[3] = getOpcodeAlt(a);}
-        {char[] a = {103}; op[4] = getOpcodeTbs(a);}
-        {char[] a = {104}; op[5] = getOpcodeTbs(a);}
-        {char[] a = {105}; op[6] = getOpcodeTbs(a);}
-        {int[] a = {8,9}; op[7] = getOpcodeCat(a);}
-        {char[] a = {1}; op[8] = getOpcodeTbs(a);}
-        {char[] a = {2}; op[9] = getOpcodeTbs(a);}
-        {int[] a = {11,16,22}; op[10] = getOpcodeAlt(a);}
-        {int[] a = {12,14,15}; op[11] = getOpcodeCat(a);}
-        op[12] = getOpcodeRep((char)0, (char)1, 13);
-        {char[] a = {3}; op[13] = getOpcodeTbs(a);}
-        op[14] = getOpcodeRnm(0, 0); // telephoneaction1
-        op[15] = getOpcodeRnm(2, 7); // contact
-        {int[] a = {17,19,20,21}; op[16] = getOpcodeCat(a);}
-        op[17] = getOpcodeRep((char)0, (char)1, 18);
-        {char[] a = {3}; op[18] = getOpcodeTbs(a);}
-        op[19] = getOpcodeRnm(1, 3); // telephoneaction2
-        {char[] a = {4}; op[20] = getOpcodeTbs(a);}
-        op[21] = getOpcodeRnm(2, 7); // contact
-        {int[] a = {23,24,25}; op[22] = getOpcodeCat(a);}
-        {char[] a = {4}; op[23] = getOpcodeTbs(a);}
-        op[24] = getOpcodeRnm(2, 7); // contact
-        op[25] = getOpcodeRnm(1, 3); // telephoneaction2
+    	Opcode[] op = new Opcode[15];
+        {char[] a = {32}; op[0] = getOpcodeTls(a);}
+        {int[] a = {2,3}; op[1] = getOpcodeAlt(a);}
+        {char[] a = {99,97,108,108}; op[2] = getOpcodeTls(a);}
+        {char[] a = {112,104,111,110,101}; op[3] = getOpcodeTls(a);}
+        {int[] a = {5,6}; op[4] = getOpcodeAlt(a);}
+        {char[] a = {115,101,97,114,99,104}; op[5] = getOpcodeTls(a);}
+        {char[] a = {102,105,110,100}; op[6] = getOpcodeTls(a);}
+        {int[] a = {8,9,10}; op[7] = getOpcodeAlt(a);}
+        {char[] a = {97,108,101,120}; op[8] = getOpcodeTls(a);}
+        {char[] a = {112,101,116,101,114}; op[9] = getOpcodeTls(a);}
+        {char[] a = {115,116,111,110,101}; op[10] = getOpcodeTls(a);}
+        {int[] a = {12,13,14}; op[11] = getOpcodeCat(a);}
+        op[12] = getOpcodeRnm(1, 1); // telephoneaction1
+        op[13] = getOpcodeRnm(0, 0); // sp
+        op[14] = getOpcodeRnm(3, 7); // contact
         return op;
     }
 
@@ -127,9 +118,10 @@ public class Call extends Grammar{
         out.println("; telephone call test");
         out.println(";");
         out.println(";");
-        out.println("telephoneaction1 = %x4e00 / %x4e01 ;");
-        out.println("telephoneaction2 = %d103 / %d104 / %d105;");
-        out.println("contact = %d1 %d2 ;");
-        out.println("main = [ %d3 ] telephoneaction1 contact / [ %d3 ] telephoneaction2 %d4 contact / %d4 contact telephoneaction2;");
+        out.println("sp = \" \"");
+        out.println("telephoneaction1 = \"call\" / \"phone\";");
+        out.println("telephoneaction2 = \"search\" / \"find\";");
+        out.println("contact = \"alex\" / \"peter\" / \"stone\";");
+        out.println("main = telephoneaction1 sp contact");
     }
 }

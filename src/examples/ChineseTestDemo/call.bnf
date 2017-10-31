@@ -3,7 +3,8 @@
 ; telephone call test
 ;
 ;
-telephoneaction1 = %x4e00 / %x4e01 ;
-telephoneaction2 = %d103 / %d104 / %d105;
-contact = %d1 %d2 ;
-main = [ %d3 ] telephoneaction1 contact / [ %d3 ] telephoneaction2 %d4 contact / %d4 contact telephoneaction2;
+sp = " "
+telephoneaction1 = "call" / "phone";
+telephoneaction2 = "search" / "find";
+contact = "alex" / "peter" / "stone";
+main = telephoneaction1 sp contact

@@ -59,8 +59,6 @@ public class DisplayAst extends RunTests{
 		// tell the parser to generate an AST
 		Ast ast = parser.enableAst(true);
 		// tell the AST which rule name nodes to keep
-		UExpressions.RuleNames[] s = UExpressions.RuleNames.values();
-
 		ast.enableRuleNode(UExpressions.RuleNames.E.ruleID(), true);
 		ast.enableRuleNode(UExpressions.RuleNames.T.ruleID(), true);
 		ast.enableRuleNode(UExpressions.RuleNames.F.ruleID(), true);
