@@ -6,6 +6,8 @@ import apg.Parser;
 import apg.Trace;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+
 import static java.lang.System.out;
 
 /**
@@ -59,4 +61,10 @@ public class MainTest {
         }
     }
 
+
+    @Test
+    public void outputUtf8() throws UnsupportedEncodingException {
+        String str= new String("我喜欢你".getBytes(), "UTF-8");
+        System.out.println(str);
+    }
 }

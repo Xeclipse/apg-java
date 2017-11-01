@@ -3,8 +3,7 @@
 ; telephone call test
 ;
 ;
-sp = " "
 telephoneaction1 = "call" / "phone";
 telephoneaction2 = "search" / "find";
 contact = "alex" / "peter" / "stone";
-main = telephoneaction1 sp contact
+main = telephoneaction1 contact ／ telephoneaction2
