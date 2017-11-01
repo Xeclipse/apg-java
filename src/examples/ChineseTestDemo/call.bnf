@@ -3,6 +3,7 @@
 ; telephone call test
 ;
 ;
-telephoneaction1 = "打" / "电话";
+telephoneaction1 = "打" / "电话" / "x6253";
 contact = "alex" / "peter" / "stone";
+sp = " ";
 main = telephoneaction1 ["给"] contact;

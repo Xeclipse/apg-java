@@ -30,18 +30,15 @@ public class MainTest {
         Ast ast = parser.enableAst(true);
 
 //      set abstract syntax tree
-//        int len = Call.RuleNames.values().length;
-//        for (int i = 0; i < len; i++) {
-//            ast.enableRuleNode(i, true);
-//        }
-        ast.enableRuleNode(Call.RuleNames.MAIN.ruleID(),true);
-        ast.enableRuleNode(Call.RuleNames.CONTACT.ruleID(),true);
-        ast.enableRuleNode(Call.RuleNames.TELEPHONEACTION1.ruleID(),true);
+        int len = Call.RuleNames.values().length;
+        for (int i = 0; i < len; i++) {
+            ast.enableRuleNode(i, true);
+        }
 
 
 
 //      inputs:
-        String inputString = "打给alex";
+        String inputString = "打给alex0";
         parser.setInputString(inputString);
 
         Parser.Result result = parser.parse();

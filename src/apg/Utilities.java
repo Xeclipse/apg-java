@@ -633,7 +633,7 @@ public class Utilities {
 					lineEndProcessed = true;
 					continue;
 				}
-				if(ch >= 32 && ch <= 126 ){
+				if( (ch >= 32 && ch <= 126) ||  ((ch >= 19968 && ch <= 40895)) ){
 					length++; // printable ASCII char
 					continue;
 				}

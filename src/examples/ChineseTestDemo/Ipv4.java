@@ -11,32 +11,30 @@ import java.io.PrintStream;
  * singleton instance of the class.
  * <p>For more information visit <a href="http://www.coasttocoastresearch.com" target="_blank">http://www.coasttocoastresearch.com</a>. */
 
-public class Call extends Grammar{
+public class Ipv4 extends Grammar{
 
     // public API
     /** Called to get a singleton instance of this class.
      * @return a singleton instance of this class, cast as the base class, Grammar. */
     public static Grammar getInstance(){
         if(factoryInstance == null){
-            factoryInstance = new Call(getRules(), getUdts(), getOpcodes());
+            factoryInstance = new Ipv4(getRules(), getUdts(), getOpcodes());
         }
         return factoryInstance;
     }
 
     // rule name enum
     /** The number of rules in the grammar */
-    public static int ruleCount = 4;
+    public static int ruleCount = 3;
     /** This enum provides easy to remember enum constants for locating the rule identifiers and names.
      * The enum constants have the same spelling as the rule names rendered in all caps with underscores replacing hyphens. */
     public enum RuleNames{
-        /** id = <code>1</code>, name = <code>"contact"</code> */
-        CONTACT("contact", 1, 4, 4),
-        /** id = <code>3</code>, name = <code>"main"</code> */
-        MAIN("main", 3, 9, 5),
-        /** id = <code>2</code>, name = <code>"sp"</code> */
-        SP("sp", 2, 8, 1),
-        /** id = <code>0</code>, name = <code>"telephoneaction1"</code> */
-        TELEPHONEACTION1("telephoneaction1", 0, 0, 4);
+        /** id = <code>1</code>, name = <code>"byte"</code> */
+        BYTE("byte", 1, 6, 2),
+        /** id = <code>2</code>, name = <code>"digit"</code> */
+        DIGIT("digit", 2, 8, 1),
+        /** id = <code>0</code>, name = <code>"ipv4"</code> */
+        IPV4("ipv4", 0, 0, 6);
         private String name;
         private int id;
         private int offset;
@@ -66,13 +64,13 @@ public class Call extends Grammar{
     }
 
     // private
-    private static Call factoryInstance = null;
-    private Call(Rule[] rules, Udt[] udts, Opcode[] opcodes){
+    private static Ipv4 factoryInstance = null;
+    private Ipv4(Rule[] rules, Udt[] udts, Opcode[] opcodes){
         super(rules, udts, opcodes);
     }
 
     private static Rule[] getRules(){
-    	Rule[] rules = new Rule[4];
+    	Rule[] rules = new Rule[3];
         for(RuleNames r : RuleNames.values()){
             rules[r.ruleID()] = getRule(r.ruleID(), r.ruleName(), r.opcodeOffset(), r.opcodeCount());
         }
@@ -86,21 +84,16 @@ public class Call extends Grammar{
 
         // opcodes
     private static Opcode[] getOpcodes(){
-    	Opcode[] op = new Opcode[14];
-        {int[] a = {1,2,3}; op[0] = getOpcodeAlt(a);}
-        {char[] a = {25171}; op[1] = getOpcodeTls(a);}
-        {char[] a = {30005,35805}; op[2] = getOpcodeTls(a);}
-        {char[] a = {120,54,50,53,51}; op[3] = getOpcodeTls(a);}
-        {int[] a = {5,6,7}; op[4] = getOpcodeAlt(a);}
-        {char[] a = {97,108,101,120}; op[5] = getOpcodeTls(a);}
-        {char[] a = {112,101,116,101,114}; op[6] = getOpcodeTls(a);}
-        {char[] a = {115,116,111,110,101}; op[7] = getOpcodeTls(a);}
-        {char[] a = {32}; op[8] = getOpcodeTls(a);}
-        {int[] a = {10,11,13}; op[9] = getOpcodeCat(a);}
-        op[10] = getOpcodeRnm(0, 0); // telephoneaction1
-        op[11] = getOpcodeRep((char)0, (char)1, 12);
-        {char[] a = {32473}; op[12] = getOpcodeTls(a);}
-        op[13] = getOpcodeRnm(1, 4); // contact
+    	Opcode[] op = new Opcode[9];
+        {int[] a = {1,2}; op[0] = getOpcodeCat(a);}
+        op[1] = getOpcodeRnm(1, 6); // byte
+        op[2] = getOpcodeRep((char)3, (char)3, 3);
+        {int[] a = {4,5}; op[3] = getOpcodeCat(a);}
+        {char[] a = {46}; op[4] = getOpcodeTls(a);}
+        op[5] = getOpcodeRnm(1, 6); // byte
+        op[6] = getOpcodeRep((char)1, (char)3, 7);
+        op[7] = getOpcodeRnm(2, 8); // digit
+        op[8] = getOpcodeTrg((char)48, (char)57);
         return op;
     }
 
@@ -108,16 +101,13 @@ public class Call extends Grammar{
      * @param out the output device to display on.*/
     public static void display(PrintStream out){
         out.println(";");
-        out.println("; examples.ChineseTestDemo.Call");
+        out.println("; examples.ChineseTestDemo.Ipv4");
         out.println(";");
         out.println(";");
+        out.println("; IPv4 address");
         out.println(";");
-        out.println("; telephone call test");
-        out.println(";");
-        out.println(";");
-        out.println("telephoneaction1 = \"打\" / \"电话\" / \"x6253\";");
-        out.println("contact = \"alex\" / \"peter\" / \"stone\";");
-        out.println("sp = \" \";");
-        out.println("main = telephoneaction1 [\"给\"] contact;");
+        out.println("ipv4  = byte 3(\".\" byte)");
+        out.println("byte  = 1*3digit");
+        out.println("digit = %d48-57");
     }
 }
