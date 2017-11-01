@@ -37,13 +37,11 @@ public class MainTest {
         ast.enableRuleNode(Call.RuleNames.MAIN.ruleID(),true);
         ast.enableRuleNode(Call.RuleNames.CONTACT.ruleID(),true);
         ast.enableRuleNode(Call.RuleNames.TELEPHONEACTION1.ruleID(),true);
-        ast.enableRuleNode(Call.RuleNames.TELEPHONEACTION2.ruleID(),true);
-        ast.enableRuleNode(Call.RuleNames.SP.ruleID(),true);
 
 
 
 //      inputs:
-        String inputString = "call alex";
+        String inputString = "打给alex";
         parser.setInputString(inputString);
 
         Parser.Result result = parser.parse();
@@ -60,11 +58,11 @@ public class MainTest {
 
         }
     }
-
-
-    @Test
-    public void outputUtf8() throws UnsupportedEncodingException {
-        String str= new String("我喜欢你".getBytes(), "UTF-8");
-        System.out.println(str);
-    }
+//
+//
+//    @Test
+//    public void outputUtf8() throws UnsupportedEncodingException {
+//        String str= new String("我喜欢你".getBytes(), "UTF-8");
+//        System.out.println(str);
+//    }
 }

@@ -3,7 +3,6 @@
 ; telephone call test
 ;
 ;
-telephoneaction1 = "call" / "phone";
-telephoneaction2 = "search" / "find";
+telephoneaction1 = "打" / "电话";
 contact = "alex" / "peter" / "stone";
-main = telephoneaction1 contact ／ telephoneaction2
+main = telephoneaction1 ["给"] contact;

@@ -51,8 +51,9 @@ AndOp         = %d38
 NotOp         = %d33
 TrgOp         = %d37 TrgRange
 TbsOp         = %d37 TbsString
-TlsOp         = %d34 *(%d32-33/%d35-127/%d9) %d34
-TcsOp         = %d39 *(%d32-38/%d40-127/%d9) %d39
+TlsOp         = %d34 *(%d32-33/%d35-127/%d9/%x4e00-9fbf) %d34
+TcsOp         = %d39 *(%d32-38/%d40-127/%d9/%x4e00-9fbf) %d39
+
 
 rep-min       = 1*(%d48-57)
 rep-min-max   = 1*(%d48-57)
@@ -80,3 +81,7 @@ wsp           = 1*fsp
 comment       = %d59 *(%d32-127 / %d9)
 LineEnd       = %d13.10 / %d10 /%d13
 LineContinue  = LineEnd (%d32/%d9)
+
+;addition
+chineseChar   = %x4e00-9fbf
+chineseWord   = *(%x4e00-9fbf)
