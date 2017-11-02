@@ -26,19 +26,17 @@ public class MainTest {
         Parser parser = new Parser(Call.getInstance());
 
 //      设置编译器
-        parser.setStartRule(Call.RuleNames.MAIN.ruleID());
+        parser.setStartRule(Call.RuleNames.CALL.ruleID());
         Ast ast = parser.enableAst(true);
 
 //      set abstract syntax tree
         int len = Call.RuleNames.values().length;
-        for (int i = 0; i < len; i++) {
-            ast.enableRuleNode(i, true);
-        }
+        ast.enableRuleNode(Call.RuleNames.CONTACT.ruleID(), true);
 
 
 
 //      inputs:
-        String inputString = "打给alex0";
+        String inputString = "打给alex 1";
         parser.setInputString(inputString);
 
         Parser.Result result = parser.parse();

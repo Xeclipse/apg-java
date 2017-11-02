@@ -29,12 +29,12 @@ public class Call extends Grammar{
     /** This enum provides easy to remember enum constants for locating the rule identifiers and names.
      * The enum constants have the same spelling as the rule names rendered in all caps with underscores replacing hyphens. */
     public enum RuleNames{
+        /** id = <code>3</code>, name = <code>"call"</code> */
+        CALL("call", 3, 12, 5),
         /** id = <code>1</code>, name = <code>"contact"</code> */
-        CONTACT("contact", 1, 4, 4),
-        /** id = <code>3</code>, name = <code>"main"</code> */
-        MAIN("main", 3, 9, 5),
+        CONTACT("contact", 1, 4, 7),
         /** id = <code>2</code>, name = <code>"sp"</code> */
-        SP("sp", 2, 8, 1),
+        SP("sp", 2, 11, 1),
         /** id = <code>0</code>, name = <code>"telephoneaction1"</code> */
         TELEPHONEACTION1("telephoneaction1", 0, 0, 4);
         private String name;
@@ -86,21 +86,24 @@ public class Call extends Grammar{
 
         // opcodes
     private static Opcode[] getOpcodes(){
-    	Opcode[] op = new Opcode[14];
+    	Opcode[] op = new Opcode[17];
         {int[] a = {1,2,3}; op[0] = getOpcodeAlt(a);}
         {char[] a = {25171}; op[1] = getOpcodeTls(a);}
         {char[] a = {30005,35805}; op[2] = getOpcodeTls(a);}
         {char[] a = {120,54,50,53,51}; op[3] = getOpcodeTls(a);}
-        {int[] a = {5,6,7}; op[4] = getOpcodeAlt(a);}
-        {char[] a = {97,108,101,120}; op[5] = getOpcodeTls(a);}
-        {char[] a = {112,101,116,101,114}; op[6] = getOpcodeTls(a);}
-        {char[] a = {115,116,111,110,101}; op[7] = getOpcodeTls(a);}
-        {char[] a = {32}; op[8] = getOpcodeTls(a);}
-        {int[] a = {10,11,13}; op[9] = getOpcodeCat(a);}
-        op[10] = getOpcodeRnm(0, 0); // telephoneaction1
-        op[11] = getOpcodeRep((char)0, (char)1, 12);
-        {char[] a = {32473}; op[12] = getOpcodeTls(a);}
-        op[13] = getOpcodeRnm(1, 4); // contact
+        {int[] a = {5,9,10}; op[4] = getOpcodeAlt(a);}
+        {int[] a = {6,7,8}; op[5] = getOpcodeCat(a);}
+        {char[] a = {97,108,101,120}; op[6] = getOpcodeTls(a);}
+        op[7] = getOpcodeRnm(2, 11); // sp
+        {char[] a = {49}; op[8] = getOpcodeTls(a);}
+        {char[] a = {112,101,116,101,114}; op[9] = getOpcodeTls(a);}
+        {char[] a = {115,116,111,110,101}; op[10] = getOpcodeTls(a);}
+        {char[] a = {32}; op[11] = getOpcodeTls(a);}
+        {int[] a = {13,14,16}; op[12] = getOpcodeCat(a);}
+        op[13] = getOpcodeRnm(0, 0); // telephoneaction1
+        op[14] = getOpcodeRep((char)0, (char)1, 15);
+        {char[] a = {32473}; op[15] = getOpcodeTls(a);}
+        op[16] = getOpcodeRnm(1, 4); // contact
         return op;
     }
 
@@ -116,8 +119,8 @@ public class Call extends Grammar{
         out.println(";");
         out.println(";");
         out.println("telephoneaction1 = \"打\" / \"电话\" / \"x6253\";");
-        out.println("contact = \"alex\" / \"peter\" / \"stone\";");
+        out.println("contact = \"alex\" sp \"1\" / \"peter\" / \"stone\";");
         out.println("sp = \" \";");
-        out.println("main = telephoneaction1 [\"给\"] contact;");
+        out.println("call = telephoneaction1 [\"给\"] contact;");
     }
 }

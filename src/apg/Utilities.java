@@ -67,19 +67,20 @@ public class Utilities {
 		if(length > input.length){length = input.length;}
 		for(int i = offset; i < length; i++){
 			char c = input[i];
-			if(c < 32 || c > 126){
-				if(!inHex){
-					buf.append(String.format("x%02X", (int)c));
-					inHex = true;
-				}
-				else{
-					buf.append(String.format(".%02X", (int)c));
-				}
-			}
-			else{
-				inHex = false;
-				buf.append(c);
-			}
+//			if(c < 32 || c > 126){
+//				if(!inHex){
+//					buf.append(String.format("x%02X", (int)c));
+//					inHex = true;
+//				}
+//				else{
+//					buf.append(String.format(".%02X", (int)c));
+//				}
+//			}
+//			else{
+//				inHex = false;
+//				buf.append(c);
+//			}
+			buf.append(c);
 			if(buf.length() > maxChars){break;}
 		}
 		return buf.toString();
